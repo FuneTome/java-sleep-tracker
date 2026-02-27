@@ -57,7 +57,9 @@ public class SleepingSession {
                   endSessionTime.toLocalTime().isAfter(timeStartDaySession));
     }
 
-    public boolean getIsSleeplessNight() { return isSleeplessNight; }
+    public boolean getIsSleeplessNight() {
+        return isSleeplessNight;
+    }
 
     private boolean isOwl() {
         boolean isOwl;
@@ -73,7 +75,9 @@ public class SleepingSession {
     }
 
     public boolean isLark() {
-        if (startSessionTime.getDayOfYear() == endSessionTime.getDayOfYear()) { return false; }
+        if (startSessionTime.getDayOfYear() == endSessionTime.getDayOfYear()) {
+            return false;
+        }
         return startSessionTime.toLocalTime().isAfter(timeFinishDaySession) &&
                 startSessionTime.toLocalTime().isBefore(timeStartLarkSession) &&
                 endSessionTime.toLocalTime().isBefore(timeFinishLarkSession);
