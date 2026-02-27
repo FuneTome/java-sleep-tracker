@@ -11,7 +11,7 @@ public class SleepTrackerAppTest {
     SleepingSessionResult ssr;
 
     @Test
-    public void testBadSessionZero(){
+    public void testBadSessionZero() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 23:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 23:00;GOOD"));
@@ -20,7 +20,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testBadSession(){
+    public void testBadSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 09:00;BAD"));
@@ -29,7 +29,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testAverageTimeOneSession(){
+    public void testAverageTimeOneSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindAverageSessionDuration().function(sessions);
@@ -37,7 +37,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testAverageTimeMultySession(){
+    public void testAverageTimeMultySession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 11:00;BAD"));
@@ -46,7 +46,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testCountSessionsForOneSession(){
+    public void testCountSessionsForOneSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new CalculateSession().function(sessions);
@@ -54,7 +54,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testCountSessionsForMultySession(){
+    public void testCountSessionsForMultySession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
@@ -64,7 +64,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testMaxSessionDurationForOneSession(){
+    public void testMaxSessionDurationForOneSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindMaxSessionDuration().function(sessions);
@@ -72,7 +72,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testMaxSessionDurationForMultySession(){
+    public void testMaxSessionDurationForMultySession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 10:00;GOOD"));
@@ -82,7 +82,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testMinSessionDurationForOneSession(){
+    public void testMinSessionDurationForOneSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindMinSessionDuration().function(sessions);
@@ -90,7 +90,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testMinSessionDurationForMultySession(){
+    public void testMinSessionDurationForMultySession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 10:00;GOOD"));
@@ -100,31 +100,31 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testSleeplessNightSession1(){
+    public void testSleeplessNightSession1() {
         SleepingSession session = new SleepingSession("01.01.25 19:00;02.01.25 05:00;GOOD");
         Assertions.assertFalse(session.getIsSleeplessNight());
     }
 
     @Test
-    public void testSleeplessNightSession2(){
+    public void testSleeplessNightSession2() {
         SleepingSession session = new SleepingSession("01.01.25 01:00;01.01.25 10:00;GOOD");
         Assertions.assertFalse(session.getIsSleeplessNight());
     }
 
     @Test
-    public void testSleeplessNightSession3(){
+    public void testSleeplessNightSession3() {
         SleepingSession session = new SleepingSession("01.01.25 17:00;01.01.25 23:00;GOOD");
         Assertions.assertTrue(session.getIsSleeplessNight());
     }
 
     @Test
-    public void testSleeplessNightSession4(){
+    public void testSleeplessNightSession4() {
         SleepingSession session = new SleepingSession("01.01.25 07:00;01.01.25 11:00;GOOD");
         Assertions.assertTrue(session.getIsSleeplessNight());
     }
 
     @Test
-    public void testClassificationOwlSession(){
+    public void testClassificationOwlSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
@@ -132,7 +132,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testClassificationLarkSession(){
+    public void testClassificationLarkSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
@@ -140,7 +140,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testClassificationPigeonSession(){
+    public void testClassificationPigeonSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 12:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
@@ -148,7 +148,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void testClassificationOwlAndLarkSession(){
+    public void testClassificationOwlAndLarkSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));
