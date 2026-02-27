@@ -73,13 +73,13 @@ public class SleepingSession {
     }
 
     public boolean isLark() {
-        if (startSessionTime.getDayOfYear() == endSessionTime.getDayOfYear()){ return false; }
+        if (startSessionTime.getDayOfYear() == endSessionTime.getDayOfYear()) { return false; }
         return startSessionTime.toLocalTime().isAfter(timeFinishDaySession) &&
                 startSessionTime.toLocalTime().isBefore(timeStartLarkSession) &&
                 endSessionTime.toLocalTime().isBefore(timeFinishLarkSession);
     }
 
-    public int whatClassification(){
+    public int whatClassification() {
         if (isSleeplessNight && isDaySession) {
             return -2;
         } else if (isOwl()) {
