@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FindSleeplessNights implements SleepAnalyzerFunction {
     @Override
-    public SleepingSessionResult function(List<SleepingSession> sleepSession){
+    public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long count = sleepSession.stream()
                 .filter(SleepingSession::getIsSleeplessNight)
                 .count();

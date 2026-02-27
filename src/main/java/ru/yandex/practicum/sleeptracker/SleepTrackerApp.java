@@ -22,7 +22,7 @@ public class SleepTrackerApp {
         functions.forEach(function -> function.function(sessions));
     }
 
-    static List<SleepAnalyzerFunction> createSleepingSessionList(){
+    static List<SleepAnalyzerFunction> createSleepingSessionList() {
         List<SleepAnalyzerFunction> sessionList = new ArrayList<>();
         sessionList.add(new CalculateSession());
         sessionList.add(new FindMinSessionDuration());

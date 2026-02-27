@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FindBadSession implements SleepAnalyzerFunction {
     @Override
-    public SleepingSessionResult function(List<SleepingSession> sleepSession){
+    public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long count = sleepSession.stream()
                 .filter(session -> session.getSleepQuality() == SleepQuality.BAD)
                 .count();

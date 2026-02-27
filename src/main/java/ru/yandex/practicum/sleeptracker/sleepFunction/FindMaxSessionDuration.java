@@ -10,7 +10,7 @@ public class FindMaxSessionDuration implements SleepAnalyzerFunction {
     private static double SECOND_TO_MINUTES = 60;
 
     @Override
-    public SleepingSessionResult function(List<SleepingSession> sleepSession){
+    public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long max = sleepSession.stream()
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(Integer.MIN_VALUE, Math::max);

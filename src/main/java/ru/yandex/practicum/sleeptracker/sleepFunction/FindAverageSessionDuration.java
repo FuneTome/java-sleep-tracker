@@ -10,7 +10,7 @@ public class FindAverageSessionDuration implements SleepAnalyzerFunction {
     private static double SECOND_TO_MINUTES = 60;
 
     @Override
-    public SleepingSessionResult function(List<SleepingSession> sleepSession){
+    public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long sum = sleepSession.stream()
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(0, Long::sum);

@@ -10,7 +10,7 @@ public class FindMinSessionDuration implements SleepAnalyzerFunction {
     private static double SECOND_TO_MINUTES = 60;
 
     @Override
-    public SleepingSessionResult function(List<SleepingSession> sleepSession){
+    public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long min = sleepSession.stream()
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(Integer.MAX_VALUE, Math::min);
