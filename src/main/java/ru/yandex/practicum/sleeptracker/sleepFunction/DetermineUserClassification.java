@@ -10,25 +10,25 @@ public class DetermineUserClassification implements SleepAnalyzerFunction {
     @Override
     public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         long countOwl = sleepSession.stream()
-                .filter(session -> session.whatClassification() == 1)
+                .filter(SleepingSession::isOwl)
                 .count();
         long countLark = sleepSession.stream()
-                .filter(session -> session.whatClassification() == -1)
+                .filter(SleepingSession::isLark)
                 .count();
         long countDayAndSleepless = sleepSession.stream()
-                .filter(session -> session.whatClassification() == -2)
+                .filter(sesseion -> sesseion.getIsDaySession() && sesseion.getIsSleeplessNight())
                 .count();
         long countPigeon = sleepSession.size() - (countOwl + countLark - countDayAndSleepless);
         long mx = max(max(countOwl, countLark), countPigeon);
         if (mx == countPigeon || countLark == countOwl) {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    "Голубь");
+                    String.valueOf(Chronotypes.Голубь));
         } else if (mx == countOwl) {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    "Сова");
+                    String.valueOf(Chronotypes.Сова));
         } else {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    "Жаворонок");
+                    String.valueOf(Chronotypes.Жаворонок));
         }
     }
 }

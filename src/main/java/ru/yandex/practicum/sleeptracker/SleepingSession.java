@@ -43,13 +43,13 @@ public class SleepingSession {
         return between(startSessionTime, endSessionTime).getSeconds();
     }
 
-    public void isSleeplessNight() {
+    private void isSleeplessNight() {
         isSleeplessNight =
                 startSessionTime.isAfter(LocalDateTime.of(endSessionTime.toLocalDate(), timeFinishSleeplessNight)) ||
                 endSessionTime.isBefore(LocalDateTime.of(startSessionTime.toLocalDate(), timeStartSleeplessNight));
     }
 
-    public void isDaySession() {
+    private void isDaySession() {
         isDaySession =
                 (startSessionTime.toLocalTime().isAfter(timeStartDaySession) &&
                  startSessionTime.toLocalTime().isBefore(timeFinishDaySession)) ||
@@ -61,7 +61,11 @@ public class SleepingSession {
         return isSleeplessNight;
     }
 
-    private boolean isOwl() {
+    public boolean getIsDaySession() {
+        return isDaySession;
+    }
+
+    public boolean isOwl() {
         boolean isOwl;
         boolean sessionLimit = endSessionTime.toLocalTime().isAfter(timeFinishOwlSession) &&
                 endSessionTime.toLocalTime().isBefore(timeStartDaySession);
@@ -81,17 +85,5 @@ public class SleepingSession {
         return startSessionTime.toLocalTime().isAfter(timeFinishDaySession) &&
                 startSessionTime.toLocalTime().isBefore(timeStartLarkSession) &&
                 endSessionTime.toLocalTime().isBefore(timeFinishLarkSession);
-    }
-
-    public int whatClassification() {
-        if (isSleeplessNight && isDaySession) {
-            return -2;
-        } else if (isOwl()) {
-            return 1;
-        } else if (isLark()) {
-            return -1;
-        } else {
-            return 0;
-        }
     }
 }
