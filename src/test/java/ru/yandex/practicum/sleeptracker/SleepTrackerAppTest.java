@@ -173,10 +173,10 @@ public class SleepTrackerAppTest {
     @Test
     public void testWhereSessionAfterZero() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        try(Reader fileReader = new FileReader("src/main/resources/session_after_zero_test.txt");
+        try (Reader fileReader = new FileReader("src/main/resources/session_after_zero_test.txt");
             BufferedReader br = new BufferedReader(fileReader);) {
             br.lines().forEach(line -> sessions.add(new SleepingSession(line)));
-        } catch (IOException exception){
+        } catch (IOException exception) {
             System.out.println("Ошибка считываемого файла: " + exception.getMessage());
         }
         Assertions.assertEquals("6", new CalculateSession().function(sessions).getResult()[0]);
@@ -185,10 +185,10 @@ public class SleepTrackerAppTest {
     @Test
     public void testWhereSessionTransferInMonth() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        try(Reader fileReader = new FileReader("src/main/resources/session_transfer_month_test.txt");
+        try (Reader fileReader = new FileReader("src/main/resources/session_transfer_month_test.txt");
             BufferedReader br = new BufferedReader(fileReader);) {
             br.lines().forEach(line -> sessions.add(new SleepingSession(line)));
-        } catch (IOException exception){
+        } catch (IOException exception) {
             System.out.println("Ошибка считываемого файла: " + exception.getMessage());
         }
         Assertions.assertEquals("10", new CalculateSession().function(sessions).getResult()[0]);
