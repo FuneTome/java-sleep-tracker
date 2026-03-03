@@ -9,6 +9,6 @@ public class CalculateSession implements SleepAnalyzerFunction {
     @Override
     public SleepingSessionResult function(List<SleepingSession> sleepSession) {
         return new SleepingSessionResult("За весь период было %s сессий сна.",
-                String.valueOf(sleepSession.size()));
+                sleepSession.size());
     }
 }

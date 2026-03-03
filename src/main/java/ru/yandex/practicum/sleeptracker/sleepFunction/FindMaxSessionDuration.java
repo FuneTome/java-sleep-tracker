@@ -15,6 +15,6 @@ public class FindMaxSessionDuration implements SleepAnalyzerFunction {
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(Integer.MIN_VALUE, Math::max);
         return new SleepingSessionResult("Самая продолжительная сессия длилась %.2s часов (%.2s минут)",
-                String.valueOf(max / SECOND_TO_HOURS), String.valueOf(max / SECOND_TO_MINUTES));
+                max / SECOND_TO_HOURS, max / SECOND_TO_MINUTES);
     }
 }

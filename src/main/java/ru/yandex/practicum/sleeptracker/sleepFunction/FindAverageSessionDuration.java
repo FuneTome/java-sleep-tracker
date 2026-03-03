@@ -14,8 +14,8 @@ public class FindAverageSessionDuration implements SleepAnalyzerFunction {
         long sum = sleepSession.stream()
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(0, Long::sum);
-        return new SleepingSessionResult("Средняя продолжительность сна составляет: %.5s часов (%s минут)",
-                String.valueOf((sum / SECOND_TO_HOURS) / sleepSession.size()),
-                String.valueOf((sum / SECOND_TO_MINUTES) / sleepSession.size()));
+        return new SleepingSessionResult("Средняя продолжительность сна составляет: %.5s часов",
+                (sum / SECOND_TO_HOURS) / sleepSession.size(),
+                (sum / SECOND_TO_MINUTES) / sleepSession.size());
     }
 }

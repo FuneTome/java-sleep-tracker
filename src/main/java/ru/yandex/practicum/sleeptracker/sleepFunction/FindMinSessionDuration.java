@@ -15,6 +15,6 @@ public class FindMinSessionDuration implements SleepAnalyzerFunction {
                 .mapToLong(SleepingSession::getDuration)
                 .reduce(Integer.MAX_VALUE, Math::min);
         return new SleepingSessionResult("Самая короткая сессия длилась %.2s часов (%.2s минут)",
-                String.valueOf(min / SECOND_TO_HOURS), String.valueOf(min / SECOND_TO_MINUTES));
+                min / SECOND_TO_HOURS, min / SECOND_TO_MINUTES);
     }
 }

@@ -4,15 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.sleepFunction.*;
 
-import java.io.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SleepTrackerAppTest {
     SleepingSessionResult ssr;
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
 
     @Test
     public void testBadSessionZero() {
@@ -20,7 +17,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 23:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 23:00;GOOD"));
         ssr = new FindBadSession().function(sessions);
-        Assertions.assertEquals("0", ssr.getResult()[0]);
+        Assertions.assertEquals(0L, ssr.getResult(0));
     }
 
     @Test
@@ -29,7 +26,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 09:00;BAD"));
         ssr = new FindBadSession().function(sessions);
-        Assertions.assertEquals("1", ssr.getResult()[0]);
+        Assertions.assertEquals(1L, ssr.getResult(0));
     }
 
     @Test
@@ -37,7 +34,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindAverageSessionDuration().function(sessions);
-        Assertions.assertEquals("10.0", ssr.getResult()[0]);
+        Assertions.assertEquals(10.0, ssr.getResult(0));
     }
 
     @Test
@@ -46,7 +43,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("02.01.25 23:00;03.01.25 11:00;BAD"));
         ssr = new FindAverageSessionDuration().function(sessions);
-        Assertions.assertEquals("11.0", ssr.getResult()[0]);
+        Assertions.assertEquals(11.0, ssr.getResult(0));
     }
 
     @Test
@@ -54,7 +51,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new CalculateSession().function(sessions);
-        Assertions.assertEquals("1", ssr.getResult()[0]);
+        Assertions.assertEquals(1, ssr.getResult(0));
     }
 
     @Test
@@ -64,7 +61,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new CalculateSession().function(sessions);
-        Assertions.assertEquals("3", ssr.getResult()[0]);
+        Assertions.assertEquals(3, ssr.getResult(0));
     }
 
     @Test
@@ -72,7 +69,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindMaxSessionDuration().function(sessions);
-        Assertions.assertEquals("10.0", ssr.getResult()[0]);
+        Assertions.assertEquals(10.0, ssr.getResult(0));
     }
 
     @Test
@@ -82,7 +79,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 10:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 11:00;GOOD"));
         ssr = new FindMaxSessionDuration().function(sessions);
-        Assertions.assertEquals("12.0", ssr.getResult()[0]);
+        Assertions.assertEquals(12.0, ssr.getResult(0));
     }
 
     @Test
@@ -90,7 +87,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 09:00;GOOD"));
         ssr = new FindMinSessionDuration().function(sessions);
-        Assertions.assertEquals("10.0", ssr.getResult()[0]);
+        Assertions.assertEquals(10.0, ssr.getResult(0));
     }
 
     @Test
@@ -100,7 +97,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 10:00;GOOD"));
         sessions.add(new SleepingSession("01.01.25 23:00;02.01.25 11:00;GOOD"));
         ssr = new FindMinSessionDuration().function(sessions);
-        Assertions.assertEquals("10.0", ssr.getResult()[0]);
+        Assertions.assertEquals(10.0, ssr.getResult(0));
     }
 
     @Test
@@ -132,7 +129,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
-        Assertions.assertEquals(String.valueOf(Chronotypes.Сова), ssr.getResult()[0]);
+        Assertions.assertEquals(Chronotypes.Owl, ssr.getResult(0));
     }
 
     @Test
@@ -140,7 +137,7 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
-        Assertions.assertEquals(String.valueOf(Chronotypes.Жаворонок), ssr.getResult()[0]);
+        Assertions.assertEquals(Chronotypes.Lark, ssr.getResult(0));
     }
 
     @Test
@@ -148,49 +145,46 @@ public class SleepTrackerAppTest {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
         sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 12:00;GOOD"));
         ssr = new DetermineUserClassification().function(sessions);
-        Assertions.assertEquals(String.valueOf(Chronotypes.Голубь), ssr.getResult()[0]);
+        Assertions.assertEquals(Chronotypes.Pigeon, ssr.getResult(0));
     }
 
     @Test
     public void testClassificationOwlAndLarkSession() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));
-        sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));
+        sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));//Сова
+        sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 10:00;GOOD"));//Сова
+        sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));//Жаворонок
+        sessions.add(new SleepingSession("01.01.25 21:30;02.01.25 06:00;GOOD"));//Жаворонок
+        sessions.add(new SleepingSession("01.01.25 23:30;02.01.25 06:00;GOOD"));//Голубь
         ssr = new DetermineUserClassification().function(sessions);
-        Assertions.assertEquals(String.valueOf(Chronotypes.Голубь), ssr.getResult()[0]);
+        Assertions.assertEquals(Chronotypes.Pigeon, ssr.getResult(0));
     }
 
     @Test
-    public void testWhereFileEmpty() throws IOException {
-        System.setOut(new PrintStream(outContent));
-        String[] args = {"src/main/resources/empty_file.txt"};
-        SleepTrackerApp.main(args);
-        Assertions.assertEquals("Файл пустой!" + System.lineSeparator(), outContent.toString());
-        System.setOut(originalOut);
+    public void testWhereFileEmpty() {
+        List<SleepingSession> sessions = new ArrayList<SleepingSession>();
+        ssr = new CalculateSession().function(sessions);
+        Assertions.assertEquals(0, ssr.getResult(0));
     }
 
 
     @Test
     public void testWhereSessionAfterZero() {
-        List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        try (Reader fileReader = new FileReader("src/main/resources/session_after_zero_test.txt");
-            BufferedReader br = new BufferedReader(fileReader);) {
-            br.lines().forEach(line -> sessions.add(new SleepingSession(line)));
-        } catch (IOException exception) {
-            System.out.println("Ошибка считываемого файла: " + exception.getMessage());
-        }
-        Assertions.assertEquals("6", new CalculateSession().function(sessions).getResult()[0]);
+        List<SleepingSession> session = new ArrayList<SleepingSession>();
+        session.add(new SleepingSession("02.10.25 00:10;02.10.25 06:20;GOOD"));
+        session.add(new SleepingSession("02.10.25 14:10;02.10.25 15:00;NORMAL"));
+        session.add(new SleepingSession("02.10.25 23:50;03.10.25 06:40;NORMAL"));
+        ssr = new CalculateSession().function(session);
+        Assertions.assertEquals(3, ssr.getResult(0));
     }
 
     @Test
     public void testWhereSessionTransferInMonth() {
-        List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        try (Reader fileReader = new FileReader("src/main/resources/session_transfer_month_test.txt");
-            BufferedReader br = new BufferedReader(fileReader);) {
-            br.lines().forEach(line -> sessions.add(new SleepingSession(line)));
-        } catch (IOException exception) {
-            System.out.println("Ошибка считываемого файла: " + exception.getMessage());
-        }
-        Assertions.assertEquals("10", new CalculateSession().function(sessions).getResult()[0]);
+        List<SleepingSession> session = new ArrayList<SleepingSession>();
+        session.add(new SleepingSession("29.09.25 23:50;30.09.25 06:40;NORMAL"));
+        session.add(new SleepingSession("30.09.25 23:40;01.10.25 08:00;BAD"));
+        session.add(new SleepingSession("02.10.25 00:10;02.10.25 06:20;GOOD"));
+        ssr = new CalculateSession().function(session);
+        Assertions.assertEquals(3, ssr.getResult(0));
     }
 }

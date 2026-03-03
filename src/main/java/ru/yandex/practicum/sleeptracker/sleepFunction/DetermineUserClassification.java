@@ -22,13 +22,13 @@ public class DetermineUserClassification implements SleepAnalyzerFunction {
         long mx = max(max(countOwl, countLark), countPigeon);
         if (mx == countPigeon || countLark == countOwl) {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    String.valueOf(Chronotypes.Голубь));
+                    Chronotypes.Pigeon);
         } else if (mx == countOwl) {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    String.valueOf(Chronotypes.Сова));
+                    Chronotypes.Owl);
         } else {
             return new SleepingSessionResult("Данный тип пользователя относится к категории \"%s\"",
-                    String.valueOf(Chronotypes.Жаворонок));
+                    Chronotypes.Lark);
         }
     }
 }

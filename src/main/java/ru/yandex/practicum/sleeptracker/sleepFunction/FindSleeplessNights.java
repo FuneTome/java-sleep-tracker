@@ -11,6 +11,6 @@ public class FindSleeplessNights implements SleepAnalyzerFunction {
         long count = sleepSession.stream()
                 .filter(SleepingSession::getIsSleeplessNight)
                 .count();
-        return new SleepingSessionResult("За все время количество бессонных ночей было: %s", String.valueOf(count));
+        return new SleepingSessionResult("За все время количество бессонных ночей было: %s", count);
     }
 }
