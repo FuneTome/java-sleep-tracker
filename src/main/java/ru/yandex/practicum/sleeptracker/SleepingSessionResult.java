@@ -1,7 +1,5 @@
 package ru.yandex.practicum.sleeptracker;
 
-import java.util.Objects;
-
 public class SleepingSessionResult {
     private String description;
     private Object[] result;
