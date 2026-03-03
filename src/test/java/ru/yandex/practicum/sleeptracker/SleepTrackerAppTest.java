@@ -163,8 +163,8 @@ public class SleepTrackerAppTest {
     @Test
     public void testWhereFileEmpty() {
         List<SleepingSession> sessions = new ArrayList<SleepingSession>();
-        ssr = new CalculateSession().function(sessions);
-        Assertions.assertEquals(0, ssr.getResult(0));
+        ssr = new FindSleeplessNights().function(sessions);
+        Assertions.assertEquals(0L, ssr.getResult(0));
     }
 
 
@@ -174,8 +174,8 @@ public class SleepTrackerAppTest {
         session.add(new SleepingSession("02.10.25 00:10;02.10.25 06:20;GOOD"));
         session.add(new SleepingSession("02.10.25 14:10;02.10.25 15:00;NORMAL"));
         session.add(new SleepingSession("02.10.25 23:50;03.10.25 06:40;NORMAL"));
-        ssr = new CalculateSession().function(session);
-        Assertions.assertEquals(3, ssr.getResult(0));
+        ssr = new FindSleeplessNights().function(session);
+        Assertions.assertEquals(1L, ssr.getResult(0));
     }
 
     @Test
@@ -184,7 +184,7 @@ public class SleepTrackerAppTest {
         session.add(new SleepingSession("29.09.25 23:50;30.09.25 06:40;NORMAL"));
         session.add(new SleepingSession("30.09.25 23:40;01.10.25 08:00;BAD"));
         session.add(new SleepingSession("02.10.25 00:10;02.10.25 06:20;GOOD"));
-        ssr = new CalculateSession().function(session);
-        Assertions.assertEquals(3, ssr.getResult(0));
+        ssr = new FindSleeplessNights().function(session);
+        Assertions.assertEquals(0L, ssr.getResult(0));
     }
 }
